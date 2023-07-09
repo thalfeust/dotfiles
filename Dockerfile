@@ -25,4 +25,8 @@ COPY .config $HOME/.config
 
 # Tmux configuration
 RUN git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-RUN ~/.tmux/plugins/tpm/bin/install_plugins
+RUN ~/.tmux/plugins/tpm/bin/install_plugins 
+
+# Git configuration
+RUN git config --global core.editor "vim"
+RUN git config --global core.commentChar '%'
