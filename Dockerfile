@@ -10,15 +10,25 @@ RUN echo 'APT::Install-Recommends "0";' >> /etc/apt/apt.conf.d/00-docker
 RUN DEBIAN_FRONTEND=noninteractive \
 	apt-get update
 
-# Installing programming packages
+# Installion of Ubuntu packages
+RUN apt-get install -y \
+	wget \
+	zip unzip
+
+# Installion of programming packages
 RUN apt-get install -y \
 	git \
 	python3 python3-pip ipython3
 
-# Installing environment packages
+# Installion of environment packages
 RUN apt-get install -y \
 	tmux \
 	vim
+
+# Installion of Fira Code Nerd font
+RUN mkdir -p $HOME/.fonts
+RUN wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip"
+RUN unzip FiraCode.zip -d $HOME/.fonts
 
 # Copy of dotfiles
 COPY .config $HOME/.config
