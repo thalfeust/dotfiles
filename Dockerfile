@@ -10,17 +10,18 @@ RUN echo 'APT::Install-Recommends "0";' >> /etc/apt/apt.conf.d/00-docker
 RUN DEBIAN_FRONTEND=noninteractive \
 	apt-get update
 
-# Installion of Ubuntu packages
+# Installation of Ubuntu packages
 RUN apt-get install -y \
 	wget \
-	zip unzip
+	zip unzip \
+	curl
 
-# Installion of programming packages
+# Installation of programming packages
 RUN apt-get install -y \
 	git \
 	python3 python3-pip ipython3
 
-# Installion of environment packages
+# Installation of environment packages
 RUN apt-get install -y \
 	tmux \
 	vim
@@ -29,6 +30,14 @@ RUN apt-get install -y \
 RUN mkdir -p $HOME/.fonts
 RUN wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraCode.zip"
 RUN unzip FiraCode.zip -d $HOME/.fonts
+
+# Neovim installation
+RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+RUN chmod u+x nvim.appimage
+RUN ./nvim.appimage --appimage-extract
+RUN ./squashfs-root/AppRun --version
+RUN ln -s /squashfs-root/AppRun /usr/bin/nvim
+RUN rm nvim.appimage
 
 # Copy of dotfiles
 COPY .config $HOME/.config
