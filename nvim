@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Default layout
+layout="colemak"
+# Array to hold non-layout arguments
+declare -a args
+
+# Process command line options
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+    --qwerty)
+      layout="qwerty"
+      shift
+      ;;
+    --colemak)
+      layout="colemak"
+      shift
+      ;;
+    *)
+      # Add non-layout arguments to the array
+      args+=("$1")
+      shift
+      ;;
+  esac
+done
+
+# Call Neovim with selecting the layout and passing the rest of the arguments
+nvim_exe "${args[@]}" --cmd "lua layout='$layout'"

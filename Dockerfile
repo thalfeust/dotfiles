@@ -36,7 +36,7 @@ RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appi
 RUN chmod u+x nvim.appimage
 RUN ./nvim.appimage --appimage-extract
 RUN ./squashfs-root/AppRun --version
-RUN ln -s /squashfs-root/AppRun /usr/bin/nvim
+RUN ln -s /squashfs-root/AppRun /usr/bin/nvim_exe
 RUN rm nvim.appimage
 
 # Copy of dotfiles
@@ -44,7 +44,11 @@ COPY .config $HOME/.config
 
 # Tmux configuration
 RUN git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-RUN ~/.tmux/plugins/tpm/bin/install_plugins 
+RUN ~/.tmux/plugins/tpm/bin/install_plugins
+
+# Neovim configuration
+COPY ./nvim /usr/bin/
+RUN chmod +x /usr/bin/nvim
 
 # Git configuration
 RUN git config --global core.editor "vim"
