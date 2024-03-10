@@ -1,4 +1,12 @@
 # Font and Theme
+## Neovim
+
+There is a Catppuccin theme selected by default, but it can be changed using the following command:
+```bash
+:Catppuccin <latte, frappe, macchiato, mocha>
+```
+> Every time you open Neovim, the theme will be the default.
+
 ## Windows Terminal
 
 In order to use specific font into WSL it is need to be used by the terminal host on Windows:
