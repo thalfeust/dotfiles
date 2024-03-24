@@ -40,6 +40,7 @@ RUN ln -s /squashfs-root/AppRun /usr/bin/nvim_exe
 RUN rm nvim.appimage
 
 # Copy of dotfiles
+COPY .bash* $HOME
 COPY .config $HOME/.config
 
 # Tmux configuration
