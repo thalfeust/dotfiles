@@ -13,7 +13,7 @@ In order to use specific font into WSL it is need to be used by the terminal hos
 1. Install font on Windows -> [https://www.nerdfonts.com/](https://www.nerdfonts.com/)
 2. Configure the **Windows Terminal** to use the correct font: **Settings > Wanted profiles > Appearance > Font face**
 
-Installation of [Catppuccin Frappe theme](https://github.com/catppuccin/windows-terminal)
+Installation of [Catppuccin themes](https://github.com/catppuccin/windows-terminal)
 1. Open **Windows Terminal** settings panel
 2. Open **JSON file** at bottom left corner
 3. Copy the contents of *flavour*.json (example: frappe.json) into the opened JSON file under **"schemes"**:
@@ -48,11 +48,38 @@ Installation of [Catppuccin Frappe theme](https://github.com/catppuccin/windows-
             "brightPurple": "#F4B8E4",
             "brightCyan": "#81C8BE",
             "brightWhite": "#A5ADCE"
+        },
+        {
+            "name": "Catppuccin Latte",
+
+            "cursorColor": "#DC8A78",
+            "selectionBackground": "#ACB0BE",
+
+            "background": "#EFF1F5",
+            "foreground": "#4C4F69",
+
+            "black": "#5C5F77",
+            "red": "#D20F39",
+            "green": "#40A02B",
+            "yellow": "#DF8E1D"
+            "blue": "#1E66F5",
+            "purple": "#EA76CB",
+            "cyan": "#179299",
+            "white": "#ACB0BE",
+            
+            "brightBlack": "#ACB0BE",
+            "brightRed": "#D20F39",
+            "brightGreen": "#40A02B",
+            "brightYellow": "#DF8E1D",
+            "brightBlue": "#1E66F5",
+            "brightPurple": "#EA76CB",
+            "brightCyan": "#179299",
+            "brightWhite": "#BCC0CC",
         }
     ],
     }
     ```
-4. Copy the contents of *flavourtheme*.json (example:-frappetheme.json) into the opened json file under **"themes"**:
+4. Copy the contents of *flavourtheme*.json (example: frappeTheme.json) into the opened json file under **"themes"**:
 	```
     {
     ..default layout
