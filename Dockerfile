@@ -1,6 +1,8 @@
 FROM ubuntu:22.04
 
 ENV HOME /home/config
+# Fix tmux colors
+ENV TERM xterm-256color
 
 # Do not install suggested dependencies
 RUN echo 'APT::Install-Suggests "0";' >> /etc/apt/apt.conf.d/00-docker
