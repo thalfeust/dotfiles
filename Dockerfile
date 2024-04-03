@@ -1,5 +1,6 @@
 FROM ubuntu:22.04
 
+ENV DEBIAN_FRONTEND=noninteractive
 ENV HOME /home/config
 # Fix tmux colors
 ENV TERM xterm-256color
@@ -9,14 +10,18 @@ RUN echo 'APT::Install-Suggests "0";' >> /etc/apt/apt.conf.d/00-docker
 RUN echo 'APT::Install-Recommends "0";' >> /etc/apt/apt.conf.d/00-docker
 
 # Package update
-RUN DEBIAN_FRONTEND=noninteractive \
-	apt-get update
+RUN	apt-get update
 
 # Installation of Ubuntu packages
 RUN apt-get install -y \
 	wget \
 	zip unzip \
-	curl
+	curl \
+	tzdata
+
+# Set the timezone
+ENV TZ=Europe/Paris
+RUN ln -fs /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
 # Installation of programming packages
 RUN apt-get install -y \
