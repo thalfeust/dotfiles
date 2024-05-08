@@ -1,7 +1,13 @@
-FROM ubuntu:22.04
+FROM ubuntu:23.04
+
+# Creation of a non-root user
+RUN useradd thalfeust --create-home
+# Hashed password
+RUN echo 'thalfeust:$1$NNyHo..o$T3r.ibNMUY49VYuvwAOMy0' | chpasswd -e
+RUN usermod -aG sudo thalfeust
+ENV HOME /home/thalfeust
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV HOME /home/config
 # Fix tmux colors
 ENV TERM xterm-256color
 
@@ -14,6 +20,7 @@ RUN	apt-get update
 
 # Installation of Ubuntu packages
 RUN apt-get install -y \
+	sudo \
 	wget \
 	zip unzip \
 	curl \
@@ -42,7 +49,6 @@ RUN unzip FiraCode.zip -d $HOME/.fonts
 RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 RUN chmod u+x nvim.appimage
 RUN ./nvim.appimage --appimage-extract
-RUN ./squashfs-root/AppRun --version
 RUN ln -s /squashfs-root/AppRun /usr/bin/nvim_exe
 RUN rm nvim.appimage
 
@@ -61,3 +67,8 @@ RUN chmod +x /usr/bin/nvim
 # Git configuration
 RUN git config --global core.editor "vim"
 RUN git config --global core.commentChar '%'
+
+# Change ownership and permissions of the home directory
+RUN chown -R thalfeust:thalfeust /home/thalfeust && chmod -R 755 /home/thalfeust
+USER thalfeust
+WORKDIR $HOME
