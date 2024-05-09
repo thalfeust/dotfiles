@@ -26,7 +26,8 @@ RUN apt-get install -y \
 	curl \
 	tzdata \
 	procps \
-	file
+	file \
+	bat
 
 # Set the timezone
 ENV TZ=Europe/Paris
@@ -80,3 +81,7 @@ RUN $HOME/.tmux/plugins/tpm/bin/install_plugins
 # Git configuration
 RUN git config --global core.editor "vim"
 RUN git config --global core.commentChar '%'
+
+# Bat theme configuration
+RUN wget -P "$(bat --config-dir)/themes" https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
+RUN bat cache --build
