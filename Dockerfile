@@ -27,7 +27,8 @@ RUN apt-get install -y \
 	tzdata \
 	procps \
 	file \
-	bat
+	bat \
+	htop
 
 # Set the timezone
 ENV TZ=Europe/Paris
@@ -69,6 +70,9 @@ RUN chown -R thalfeust /home/linuxbrew/.linuxbrew
 RUN chown -R thalfeust:thalfeust /home/thalfeust && chmod -R 755 /home/thalfeust
 USER thalfeust
 WORKDIR $HOME
+
+# Homebrew packages installation
+RUN brew install fzf
 
 # Copy of dotfiles
 COPY .bash* $HOME

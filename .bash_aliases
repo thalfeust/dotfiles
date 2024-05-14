@@ -1,5 +1,5 @@
 # tmux aliase
-alias tmux='tmux -u'
+alias tmux='tmux -u attach || tmux -u'
 
 # ls aliases
 alias ll='ls -l -all --classify'
