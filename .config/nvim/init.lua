@@ -19,7 +19,8 @@ vim.opt.rtp:prepend(lazypath)
 
 -- plugins loading
 require("lazy").setup({
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    { "tpope/vim-obsession"}
 })
 
 -- plugins configuration
