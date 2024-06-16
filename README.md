@@ -38,3 +38,23 @@ RUN echo 'thalfeust:new hash' | chpasswd -e
 
 * [Font and Theme documentation](./doc/FontAndTheme.md)
 * [Neovim configuration](./doc/NeovimConfiguration.md)
+
+## Resources
+
+### Elijah Manor
+* 󰗃 [Zero to IDE with LazyVim](https://www.youtube.com/watch?v=N93cTbtLCIM) 
+*  [Dotfiles](https://github.com/elijahmanor/dotfiles/tree/master)
+
+### Chris@Machine
+* 󰗃 [Neovim IDE from Scratch - Introduction (100% lua config)](https://www.youtube.com/watch?v=ctH-a-1eUME&list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ)
+* 󰊤 [Neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)
+
+### Dream Of Code
+* 󰗃 [Turn VIM into a full featured IDE with only one command](https://www.youtube.com/watch?v=Mtgo-nP_r8Y&list=PL05iK6gnYad1sb4iQyqsim_Jc_peZdNXf)
+* 󰗃 [Tmux has forever changed the way I write code.](https://www.youtube.com/watch?v=DzNmUNvnB04)
+*  [Tmux dotfiles](https://github.com/dreamsofcode-io/tmux/blob/main/tmux.conf)
+*  [Dotfiles](https://github.com/dreamsofautonomy/dotfiles)
+
+### DevOps Toolbox - Omerxx
+* 󰗃 [Tmux from scratch to Beast Mode](https://www.youtube.com/watch?v=GH3kpsbbERo)
+*  [Dotfiles](https://github.com/omerxx/dotfiles)
