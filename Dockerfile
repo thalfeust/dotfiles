@@ -28,7 +28,8 @@ RUN apt-get install -y \
 	procps \
 	file \
 	bat \
-	htop
+	htop \
+	openssh-client
 
 # Set the timezone
 ENV TZ=Europe/Paris

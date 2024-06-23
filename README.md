@@ -11,6 +11,20 @@ podman build . --tag configuration
 podman run -it --name configuration localhost/configuration:latest
 ```
 
+3. Mount volume:
+```shell
+podman run --volume <hostpath>:/workspace [...]
+```
+
+4. Forward SSH keys:
+```shell
+podman run --volume ~/.ssh:/home/thalfeust/.ssh [...]
+# In Container
+chmod 700 /home/thalfeust/.ssh
+chmod 600 /home/thalfeust/.ssh/id_rsa
+chmod 644 /home/thalfeust/.ssh/id_rsa.pub
+```
+
 ## Windows Terminal specification
 
 Windows Terminal `AtlasEngine` incorrectly renders some NerdFonts glyphs ([Github issue](https://github.com/microsoft/terminal/issues/14022)).
