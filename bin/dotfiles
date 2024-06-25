@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# color codes
+LBLACK='\033[01;30m'
+LGREEN='\033[01;32m'
+LRED='\033[01;31m'
+LYELLOW='\033[01;33m'
+OVERWRITE='\e[1A\e[K'
+NOCOLOR='\033[0m'
+
+# variables
+DOTFILES_LOG="$HOME/.dotfiles.log"
+
+# creates log file
+function _create_log {
+    # create log if it doesn't exist
+    if ! [[ -f $DOTFILES_LOG ]]; then
+        touch $DOTFILES_LOG
+    fi
+
+    # empty log
+    >$DOTFILES_LOG
+}
+
+# colors the message given as argument with spacing
+# when a new message is received, overwrite the color of the previous
+# if no message is givem, only updates the last message
+function _print {
+    # if the function has already been called, complete the previous print
+    if [[ $LAST_PRINT != "" ]]; then
+        printf "${OVERWRITE}${LGREEN} [✓]  ${LBLACK}${LAST_PRINT}${NOCOLOR}\n"
+    fi
+
+    if [[ -n "$1" ]]; then
+        # save message and print
+        LAST_PRINT=$1
+        printf "${LBLACK} [ ]  ${LAST_PRINT} \n${NOCOLOR}"
+    fi
+}
+
+function _raise_error_and_quit {
+    # overwrite last print
+    printf "${OVERWRITE}${LRED} [✗]  ${LAST_PRINT}${NOCOLOR}\n"
+
+    # read error from log and add spacing
+    while read line; do
+        printf "      ${line}\n"
+    done <$DOTFILES_LOG
+
+    printf "${LYELLOW}An error occured, see ${DOTFILES_LOG} for further information${NOCOLOR}\n"
+
+    # exit installation
+    exit 1
+}
+
+# performs commands with error checking
+function _cmd {
+    # hide stdout
+    if eval "$1" 1>/dev/null 2>$DOTFILES_LOG; then
+        return 0 # success
+    fi
+
+    _raise_error_and_quit
+}
+
+# check OS compatibility
+source /etc/os-release
+_print "Loading Setup for detected OS: $ID"
+if [[ -n "$ID" && "$ID" != "ubuntu" ]]; then
+    _print "Unsupported OS"
+    # log
+    _cmd "echo 'Unsupported OS'"
+    _raise_error_and_quit
+fi
+
+# final print
+_print
