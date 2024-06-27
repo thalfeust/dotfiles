@@ -63,6 +63,8 @@ function _cmd {
     _raise_error_and_quit
 }
 
+pushd "$HOME" 2>&1 >/dev/null
+
 # check OS compatibility
 source /etc/os-release
 _print "Loading Setup for detected OS: $ID"
@@ -72,6 +74,41 @@ if [[ -n "$ID" && "$ID" != "ubuntu" ]]; then
     _cmd "echo 'Unsupported OS'"
     _raise_error_and_quit
 fi
+
+# python installation
+if ! dpkg -s python3 >/dev/null 2>&1; then
+    _print "Installing Python3"
+    _cmd "sudo apt update"
+    _cmd "sudo apt install -y python3"
+fi
+
+# pip installation
+if ! dpkg -s python3-pip >/dev/null 2>&1; then
+    _print "Installing Python3 Pip"
+    _cmd "sudo apt update"
+    _cmd "apt install -y python3-pip"
+fi
+
+# virtual environment installation
+if ! dpkg -s virtualenv >/dev/null 2>&1; then
+    _print "Installing virtual environment"
+    _cmd "apt install -y python3-virtualenv"
+fi
+
+_print "Activating virtual environment"
+_cmd "virtualenv -p python3 venv-ansible"
+_cmd "source venv-ansible/bin/activate"
+
+# ansible installation
+if ! python3 -m pip show ansible &>/dev/null; then
+    _print "Installing Ansible"
+    _cmd "python3 -m pip install ansible"
+fi
+
+_print "Deactivating virtual environment"
+_cmd "deactivate"
+
+popd 2>&1 >/dev/null
 
 # final print
 _print
