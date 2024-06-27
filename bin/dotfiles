@@ -116,9 +116,15 @@ if ! python3 -m pip show ansible &>/dev/null; then
     _cmd "python3 -m pip install ansible"
 fi
 
+pushd "$DOTFILES_DIR" 2>&1 >/dev/null
+
+_print "Running playbook"
+ansible-playbook "$DOTFILES_DIR/main.yml" "$@"
+
 _print "Deactivating virtual environment"
 _cmd "deactivate"
 
+popd 2>&1 >/dev/null
 popd 2>&1 >/dev/null
 
 # final print
