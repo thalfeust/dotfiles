@@ -9,6 +9,7 @@ OVERWRITE='\e[1A\e[K'
 NOCOLOR='\033[0m'
 
 # variables
+DOTFILES_DIR="$HOME/.dotfiles"
 DOTFILES_LOG="$HOME/.dotfiles.log"
 
 # creates log file
@@ -93,6 +94,16 @@ fi
 if ! dpkg -s virtualenv >/dev/null 2>&1; then
     _print "Installing virtual environment"
     _cmd "apt install -y python3-virtualenv"
+fi
+
+# clone or update the repository
+if ! [[ -d "$DOTFILES_DIR" ]]; then
+    _print "Cloning repository"
+    _cmd "git clone --quiet https://github.com/thalfeust/dotfiles.git $DOTFILES_DIR"
+    _cmd "chmod +x $DOTFILES_DIR/bin/dotfiles"
+else
+    _print "Updating repository"
+    _cmd "git -C $DOTFILES_DIR pull --quiet"
 fi
 
 _print "Activating virtual environment"
