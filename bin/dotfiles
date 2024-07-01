@@ -101,13 +101,13 @@ fi
 if ! dpkg -s python3-pip >/dev/null 2>&1; then
     _print "Installing Python3 Pip"
     _cmd "sudo apt update"
-    _cmd "apt install -y python3-pip"
+    _cmd "sudo apt install -y python3-pip"
 fi
 
 # virtual environment installation
 if ! dpkg -s virtualenv >/dev/null 2>&1; then
     _print "Installing virtual environment"
-    _cmd "apt install -y python3-virtualenv"
+    _cmd "sudo apt install -y python3-virtualenv"
 fi
 
 # clone or update the repository
@@ -129,7 +129,7 @@ _python_env_configuration
 pushd "$DOTFILES_DIR" 2>&1 >/dev/null
 
 _print "Running playbook"
-ansible-playbook "$DOTFILES_DIR/main.yml" "$@"
+ansible-playbook --inventory inventory.yml "$DOTFILES_DIR/main.yml" "$@"
 
 _print "Deactivating virtual environment"
 _cmd "deactivate"
