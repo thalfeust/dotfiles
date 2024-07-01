@@ -64,6 +64,20 @@ function _cmd {
     _raise_error_and_quit
 }
 
+function _python_env_configuration {
+    # ansible installation
+    if ! python3 -m pip show ansible &>/dev/null; then
+        _print "Installing Ansible"
+        _cmd "python3 -m pip install ansible"
+    fi
+
+    # ansible installation
+    if ! python3 -m pip show watchdog &>/dev/null; then
+        _print "Installing Python3 Watchdog"
+        _cmd "python3 -m pip install watchdog"
+    fi
+}
+
 pushd "$HOME" 2>&1 >/dev/null
 
 # check OS compatibility
@@ -110,11 +124,7 @@ _print "Activating virtual environment"
 _cmd "virtualenv -p python3 venv-ansible"
 _cmd "source venv-ansible/bin/activate"
 
-# ansible installation
-if ! python3 -m pip show ansible &>/dev/null; then
-    _print "Installing Ansible"
-    _cmd "python3 -m pip install ansible"
-fi
+_python_env_configuration
 
 pushd "$DOTFILES_DIR" 2>&1 >/dev/null
 
