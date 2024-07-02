@@ -9,7 +9,7 @@
 
 ## Ansible translation
 
-- [ ] Tmux
+- [X] Tmux
 - [X] Bat
 - [ ] Nvim
 - [X] bash
