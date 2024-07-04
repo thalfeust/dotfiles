@@ -1,0 +1,45 @@
+---
+- name: Bat | Installation
+  ansible.builtin.apt:
+    name: bat
+    state: latest
+  become: true
+
+- name: Bat | Config folder creation
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ ansible_user_dir }}/.config/bat"
+    - "{{ ansible_user_dir }}/.config/bat/themes"
+
+- name: Bat | Copy dotfiles
+  ansible.builtin.copy:
+    src: config
+    dest: "{{ ansible_user_dir }}/.config/bat/config"
+    force: true
+
+- name: Bat | Install Cattppuccin theme
+  ansible.builtin.uri:
+    url: https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Frappe.tmTheme
+    dest: "{{ ansible_user_dir }}/.config/bat/themes/Catppuccin Frappe.tmTheme"
+    method: GET
+    force_basic_auth: yes
+
+- name: Bat | Check if /usr/bin/batcat exists
+  ansible.builtin.stat:
+    path: /usr/bin/batcat
+  register: batcat_stat
+
+- name: Bat | Symlink creation
+  ansible.builtin.file:
+    src: /usr/bin/batcat
+    dest: /usr/bin/bat
+    state: link
+    force: true
+  become: true
+  when: batcat_stat.stat.exists
+
+- name: Bat | Configuration
+  ansible.builtin.command:
+    cmd: "bat cache --build"

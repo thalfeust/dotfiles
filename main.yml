@@ -15,3 +15,12 @@
         state: latest
         update_cache: yes # runs the equivalent of apt-get update before the operation
       become: true
+
+  tasks:
+    - name: Run all roles
+      include_role:
+        name: "{{ role }}"
+      loop:
+        - bat
+      loop_control:
+        loop_var: role
