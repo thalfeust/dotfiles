@@ -22,5 +22,6 @@
         name: "{{ role }}"
       loop:
         - bat
+        - fonts
       loop_control:
         loop_var: role

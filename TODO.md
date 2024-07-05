@@ -12,3 +12,5 @@
 - [X] Bat
 - [ ] Nvim
 - [ ] bash
+- [X] font
+- [ ] Homebrew
