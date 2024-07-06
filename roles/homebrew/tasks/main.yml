@@ -1,0 +1,14 @@
+---
+- name: Homebrew | Download installation script
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+    dest: /tmp/install.sh
+    mode: "0744"
+    force: true
+
+- name: Homebrew | Installation
+  ansible.builtin.shell: /tmp/install.sh
+  args:
+    executable: /bin/bash
+  # Note: Homebrew executable have been added to the path using the
+  # Bash configuration file -> See /roles/bash/files/bashrc

@@ -14,4 +14,4 @@
 - [ ] Nvim
 - [X] bash
 - [X] font
-- [ ] Homebrew
+- [X] Homebrew

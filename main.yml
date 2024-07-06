@@ -24,5 +24,6 @@
         - bash
         - bat
         - fonts
+        - homebrew
       loop_control:
         loop_var: role
