@@ -134,6 +134,9 @@ ansible-playbook --inventory inventory.yml "$DOTFILES_DIR/main.yml" "$@"
 _print "Deactivating virtual environment"
 _cmd "deactivate"
 
+_print "Reload the bash configuration"
+_cmd "source $HOME/.bashrc"
+
 popd 2>&1 >/dev/null
 popd 2>&1 >/dev/null
 

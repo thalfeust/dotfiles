@@ -1,0 +1,9 @@
+---
+- name: Bash | Copy dotfiles
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}"
+    force: true
+  loop:
+    - .bashrc
+    - .bash_aliases

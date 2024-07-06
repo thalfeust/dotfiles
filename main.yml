@@ -21,6 +21,7 @@
       include_role:
         name: "{{ role }}"
       loop:
+        - bash
         - bat
         - fonts
       loop_control:
