@@ -1,0 +1,144 @@
+#!/bin/bash
+
+# color codes
+LBLACK='\033[01;30m'
+LGREEN='\033[01;32m'
+LRED='\033[01;31m'
+LYELLOW='\033[01;33m'
+OVERWRITE='\e[1A\e[K'
+NOCOLOR='\033[0m'
+
+# variables
+DOTFILES_DIR="$HOME/.dotfiles"
+DOTFILES_LOG="$HOME/.dotfiles.log"
+
+# creates log file
+function _create_log {
+    # create log if it doesn't exist
+    if ! [[ -f $DOTFILES_LOG ]]; then
+        touch $DOTFILES_LOG
+    fi
+
+    # empty log
+    >$DOTFILES_LOG
+}
+
+# colors the message given as argument with spacing
+# when a new message is received, overwrite the color of the previous
+# if no message is givem, only updates the last message
+function _print {
+    # if the function has already been called, complete the previous print
+    if [[ $LAST_PRINT != "" ]]; then
+        printf "${OVERWRITE}${LGREEN} [✓]  ${LBLACK}${LAST_PRINT}${NOCOLOR}\n"
+    fi
+
+    if [[ -n "$1" ]]; then
+        # save message and print
+        LAST_PRINT=$1
+        printf "${LBLACK} [ ]  ${LAST_PRINT} \n${NOCOLOR}"
+    fi
+}
+
+function _raise_error_and_quit {
+    # overwrite last print
+    printf "${OVERWRITE}${LRED} [✗]  ${LAST_PRINT}${NOCOLOR}\n"
+
+    # read error from log and add spacing
+    while read line; do
+        printf "      ${line}\n"
+    done <$DOTFILES_LOG
+
+    printf "${LYELLOW}An error occured, see ${DOTFILES_LOG} for further information${NOCOLOR}\n"
+
+    # exit installation
+    exit 1
+}
+
+# performs commands with error checking
+function _cmd {
+    # hide stdout
+    if eval "$1" 1>/dev/null 2>$DOTFILES_LOG; then
+        return 0 # success
+    fi
+
+    _raise_error_and_quit
+}
+
+function _python_env_configuration {
+    # ansible installation
+    if ! python3 -m pip show ansible &>/dev/null; then
+        _print "Installing Ansible"
+        _cmd "python3 -m pip install ansible"
+    fi
+
+    # ansible installation
+    if ! python3 -m pip show watchdog &>/dev/null; then
+        _print "Installing Python3 Watchdog"
+        _cmd "python3 -m pip install watchdog"
+    fi
+}
+
+pushd "$HOME" 2>&1 >/dev/null
+
+# check OS compatibility
+source /etc/os-release
+_print "Loading Setup for detected OS: $ID"
+if [[ -n "$ID" && "$ID" != "ubuntu" ]]; then
+    _print "Unsupported OS"
+    # log
+    _cmd "echo 'Unsupported OS'"
+    _raise_error_and_quit
+fi
+
+# python installation
+if ! dpkg -s python3 >/dev/null 2>&1; then
+    _print "Installing Python3"
+    _cmd "sudo apt update"
+    _cmd "sudo apt install -y python3"
+fi
+
+# pip installation
+if ! dpkg -s python3-pip >/dev/null 2>&1; then
+    _print "Installing Python3 Pip"
+    _cmd "sudo apt update"
+    _cmd "sudo apt install -y python3-pip"
+fi
+
+# virtual environment installation
+if ! dpkg -s virtualenv >/dev/null 2>&1; then
+    _print "Installing virtual environment"
+    _cmd "sudo apt install -y python3-virtualenv"
+fi
+
+# clone or update the repository
+if ! [[ -d "$DOTFILES_DIR" ]]; then
+    _print "Cloning repository"
+    _cmd "git clone --quiet https://github.com/thalfeust/dotfiles.git $DOTFILES_DIR"
+    _cmd "chmod +x $DOTFILES_DIR/bin/dotfiles"
+else
+    _print "Updating repository"
+    _cmd "git -C $DOTFILES_DIR pull --quiet"
+fi
+
+_print "Activating virtual environment"
+_cmd "virtualenv -p python3 venv-ansible"
+_cmd "source venv-ansible/bin/activate"
+
+_python_env_configuration
+
+pushd "$DOTFILES_DIR" 2>&1 >/dev/null
+
+_print "Running playbook"
+ansible-playbook --inventory inventory.yml "$DOTFILES_DIR/main.yml" "$@"
+
+_print "Deactivating virtual environment"
+_cmd "deactivate"
+
+_print "Reload the bash configuration"
+_cmd "source $HOME/.bashrc"
+
+popd 2>&1 >/dev/null
+popd 2>&1 >/dev/null
+
+# final print
+_print

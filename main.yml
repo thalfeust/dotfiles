@@ -1,0 +1,31 @@
+---
+- name: DotFiles Config
+  hosts: localhost
+  connection: local
+
+  pre_tasks:
+    - name: Install common packages
+      ansible.builtin.apt:
+        name:
+          - wget
+          - zip
+          - unzip
+          - curl
+          - htop
+        state: latest
+        update_cache: yes # runs the equivalent of apt-get update before the operation
+      become: true
+
+  tasks:
+    - name: Run all roles
+      include_role:
+        name: "{{ role }}"
+      loop:
+        - bash
+        - bat
+        - fonts
+        - homebrew
+        - nvim
+        - tmux
+      loop_control:
+        loop_var: role

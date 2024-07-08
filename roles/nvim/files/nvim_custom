@@ -25,4 +25,4 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 # Call Neovim with selecting the layout and passing the rest of the arguments
-nvim_exe "${args[@]}" --cmd "lua layout='$layout'"
+nvim "${args[@]}" --cmd "lua layout='$layout'"

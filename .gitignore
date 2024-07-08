@@ -1,2 +1,5 @@
 # Docker
 *.swp
+
+# Python
+__pycache__/

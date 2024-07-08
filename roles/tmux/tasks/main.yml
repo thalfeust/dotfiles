@@ -1,0 +1,39 @@
+---
+- name: Tmux | Dependencies installation
+  community.general.homebrew:
+    name: fzf
+    state: latest
+    update_homebrew: yes
+
+- name: Tmux | Installation
+  ansible.builtin.apt:
+    name: tmux
+    state: latest
+  become: true
+
+- name: Tmux | Config folder creation
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/tmux"
+    state: directory
+
+- name: Tmux | Copy dotfiles (1/2)
+  ansible.builtin.copy:
+    src: tmux.conf
+    dest: "{{ ansible_user_dir }}/.config/tmux/tmux.conf"
+    force: true
+
+- name: Tmux | Copy dotfiles (2/2)
+  ansible.builtin.copy:
+    src: toggle-flavour.sh
+    dest: "{{ ansible_user_dir }}/.config/tmux/toggle-flavour.sh"
+    mode: "744"
+    force: true
+
+- name: Tmux | Install TPM
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins/tpm
+
+- name: Tmux | Configuration
+  ansible.builtin.command:
+    cmd: "{{ ansible_env.HOME }}/.tmux/plugins/tpm/bin/install_plugins"
