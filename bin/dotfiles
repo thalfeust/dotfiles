@@ -11,6 +11,7 @@ NOCOLOR='\033[0m'
 # variables
 DOTFILES_DIR="$HOME/.dotfiles"
 DOTFILES_LOG="$HOME/.dotfiles.log"
+GIT_SSH="git@github.com:thalfeust/dotfiles.git"
 
 # creates log file
 function _create_log {
@@ -127,6 +128,12 @@ _cmd "source venv-ansible/bin/activate"
 _python_env_configuration
 
 pushd "$DOTFILES_DIR" 2>&1 >/dev/null
+
+REMOTE_URL=$(git config --get remote.origin.url)
+if ! [[ "$REMOTE_URL" = "$GIT_SSH" ]]; then
+    _print "Updating repository remote url"
+    _cmd "git remote set-url origin $GIT_SSH"
+fi
 
 _print "Running playbook"
 ansible-playbook --inventory inventory.yml "$DOTFILES_DIR/main.yml" "$@"
