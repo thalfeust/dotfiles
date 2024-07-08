@@ -1,0 +1,39 @@
+---
+- name: Nvim | Installation
+  community.general.homebrew:
+    name: neovim
+    state: latest
+    update_homebrew: yes
+
+- name: Nvim | Custom bin directory creation
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.local/bin"
+    state: directory
+
+- name: Nvim | Config folder creation
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/nvim/lua/user"
+    state: directory
+
+- name: Nvim | Copy dotfiles
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/nvim/{{ item }}"
+    force: true
+  loop:
+    - init.lua
+    - lua/user/colorscheme.lua
+    - lua/user/keymaps_colemak.lua
+    - lua/user/keymaps_qwerty.lua
+    - lua/user/options.lua
+    - lua/user/session.lua
+
+- name: Nvim | Copy custom executable
+  ansible.builtin.copy:
+    src: nvim_custom
+    dest: "{{ ansible_user_dir }}/.local/bin/nvim_custom"
+    mode: "744"
+    force: true
+  # Note: An alias has been created to replace 'nvim' and
+  # the custom executable has been added to the path
+  # See /roles/bash/files/bashrc and /roles/bash/files/bash_alliases

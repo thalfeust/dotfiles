@@ -11,7 +11,7 @@
 
 - [X] Tmux
 - [X] Bat
-- [ ] Nvim
+- [X] Nvim
 - [X] bash
 - [X] font
 - [X] Homebrew

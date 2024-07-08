@@ -25,6 +25,7 @@
         - bat
         - fonts
         - homebrew
+        - nvim
         - tmux
       loop_control:
         loop_var: role

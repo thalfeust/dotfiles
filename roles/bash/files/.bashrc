@@ -5,3 +5,4 @@ fi
 
 # PATH
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
+export PATH=$PATH:$HOME/.local/bin
