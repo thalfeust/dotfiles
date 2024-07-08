@@ -1,15 +1,39 @@
-Docker source repository for an Ubuntu-based container with my personal configuration.
+# Dotfiles
 
-## Build and Use the Container
+Fully automated deployment of my development environment, based on Ansible.
 
-1. Build the image:
+> This repo is heavily influenced by [TechDufus](https://github.com/TechDufus/dotfiles)'s repo
+
+## Usage
+
+This playbook includes a custom shell script located at bin/dotfiles that initialize the environment and performs a full system upgrade.
+
 ```shell
-podman build . --tag configuration
+source <(curl -fsSL https://raw.githubusercontent.com/thalfeust/dotfiles/main/bin/dotfiles)
 ```
-2. Run the container:
+
+> ⚠️ Warning: Execution of the script using `source` is mandatory for certain updates to be applied
+
+After the first run, the script can be executed using the following command:
+
 ```shell
-podman run -it --name configuration localhost/configuration:latest
+source ~/.dotfiles/bin/dotfiles
 ```
+
+## Requirements
+
+* Operating System: **Ubuntu**
+* Sudo access rights
+
+## Ansible
+
+Ansible is an open-source IT automation tool that simplifies configuration management, application deployment, and task automation across distributed systems.
+
+It is used to deploy the development environment into the localhost machine.
+
+### Specifications
+* The current version of the script use a Python virtual environment to install Ansible. It means that Ansible cannot install pip packages outside the environment
+* In the current state of ansible/dotfiles, no Python packages can be installed
 
 ## Windows Terminal specification
 
@@ -19,23 +43,9 @@ To solve the problem, you can deactivate AtlasEngine :
 2. Go to `Settigs` > `Rendering`
 3. Deselect **Use the new text renderer ("AtlasEngint")**
 
-## Password management
-
-The Dockerfile creates an user named **thalfeust** and set its password. To prevent the password from appearing unencrypted in the code, the image file contains an MD5-based hash of the password.
-
-Procedure to modify the password:
-1. Create a hash of the new password:
-```shell
-openssl passwd -1 "new password"
-```
-2. Update the Dockerfile line:
-```shell
-RUN echo 'thalfeust:new hash' | chpasswd -e
-```
-3. Re-build the image
-
 ## Documentation
 
+* [Docker container configuration](./doc/DockerContainer.md)
 * [Font and Theme documentation](./doc/FontAndTheme.md)
 * [Neovim configuration](./doc/NeovimConfiguration.md)
 
@@ -58,3 +68,11 @@ RUN echo 'thalfeust:new hash' | chpasswd -e
 ### DevOps Toolbox - Omerxx
 * 󰗃 [Tmux from scratch to Beast Mode](https://www.youtube.com/watch?v=GH3kpsbbERo)
 *  [Dotfiles](https://github.com/omerxx/dotfiles)
+
+### TechDufus
+* 󰗃 [Automating your Dotfiles with Ansible: A Showcase](https://www.youtube.com/watch?v=hPPIScBt4Gw)
+*  [Dotfiles](https://github.com/TechDufus/dotfiles)
+
+### TheAltF4Stream
+* 󰗃 [How To Automate Your Dev Setup](https://www.youtube.com/watch?v=V_Cj_p6se3k)
+*  [Dotfiles](https://github.com/ALT-F4-LLC/dotfiles)
