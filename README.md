@@ -12,13 +12,15 @@ This playbook includes a custom shell script located at bin/dotfiles that initia
 source <(curl -fsSL https://raw.githubusercontent.com/thalfeust/dotfiles/main/bin/dotfiles)
 ```
 
-> ⚠️ Warning: Execution of the script using `source` is mandatory for certain updates to be applied
+> ℹ️ Note: The script clones the repository using the https URL, but changes the remote to a SSH URL, which requires an SSH key
 
 After the first run, the script can be executed using the following command:
 
 ```shell
 source ~/.dotfiles/bin/dotfiles
 ```
+
+> ⚠️ Warning: Execution of the script using `source` is mandatory for certain updates to be applied
 
 ## Requirements
 

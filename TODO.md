@@ -7,6 +7,14 @@
 - [ ] Copy Host's SSH keys
 - [ ] Find a tool to visualize git tree
 
+## Tmux
+
+- [ ] Take a look on Tmux theme Tokio-Night -> [Repository](https://github.com/fabioluciano/tmux-tokyo-night)
+
+## Nvim
+
+- [ ] Manage binding for search -> Currently 'n' is used to move in Colemak mode
+
 ## Ansible translation
 
 - [X] Tmux
