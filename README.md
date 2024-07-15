@@ -64,7 +64,9 @@ To solve the problem, you can deactivate AtlasEngine :
 ### Dream Of Code
 * 󰗃 [Turn VIM into a full featured IDE with only one command](https://www.youtube.com/watch?v=Mtgo-nP_r8Y&list=PL05iK6gnYad1sb4iQyqsim_Jc_peZdNXf)
 * 󰗃 [Tmux has forever changed the way I write code.](https://www.youtube.com/watch?v=DzNmUNvnB04)
+* 󰗃 [This Zsh config is perhaps my favorite one yet](https://www.youtube.com/watch?v=ud7YxC33Z3w)
 *  [Tmux dotfiles](https://github.com/dreamsofcode-io/tmux/blob/main/tmux.conf)
+*  [Zsh dotfiles](https://github.com/dreamsofautonomy/zensh)
 *  [Dotfiles](https://github.com/dreamsofautonomy/dotfiles)
 
 ### DevOps Toolbox - Omerxx
