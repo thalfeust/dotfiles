@@ -144,6 +144,9 @@ _cmd "deactivate"
 _print "Reload the bash configuration"
 _cmd "source $HOME/.bashrc"
 
+_print "Reload the Zsh configuration"
+_cmd "source $HOME/.zshrc"
+
 popd 2>&1 >/dev/null
 popd 2>&1 >/dev/null
 

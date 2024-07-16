@@ -10,3 +10,9 @@
     name: "{{ ansible_env.USER }}"
     shell: /bin/zsh
   become: true
+
+- name: Zsh | Copy dotfiles
+  ansible.builtin.copy:
+    src: .zshrc
+    dest: "{{ ansible_user_dir }}/.zshrc"
+    force: true
