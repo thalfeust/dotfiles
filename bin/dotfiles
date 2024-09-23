@@ -65,17 +65,29 @@ function _cmd {
     _raise_error_and_quit
 }
 
-function _python_env_configuration {
-    # ansible installation
-    if ! python3 -m pip show ansible &>/dev/null; then
-        _print "Installing Ansible"
-        _cmd "python3 -m pip install ansible"
+function _dependencies_installation {
+    _print "Updating APT"
+    _cmd "sudo apt update"
+
+    if ! dpkg -s python3 >/dev/null 2>&1; then
+        _print "Installing Python3"
+        _cmd "sudo apt install -y python3"
+    fi
+
+    if ! dpkg -s python3-pip >/dev/null 2>&1; then
+        _print "Installing Python3-pip"
+        _cmd "sudo apt install -y python3-pip"
+    fi
+
+    if ! dpkg -s python3-watchdog >/dev/null 2>&1; then
+        _print "Installing Python3-watchdog"
+        _cmd "sudo apt install -y python3-watchdog"
     fi
 
     # ansible installation
-    if ! python3 -m pip show watchdog &>/dev/null; then
-        _print "Installing Python3 Watchdog"
-        _cmd "python3 -m pip install watchdog"
+    if ! dpkg -s ansible >/dev/null 2>&1; then
+        _print "Installing Ansible"
+        _cmd "sudo apt install -y ansible"
     fi
 }
 
@@ -91,25 +103,8 @@ if [[ -n "$ID" && "$ID" != "ubuntu" ]]; then
     _raise_error_and_quit
 fi
 
-# python installation
-if ! dpkg -s python3 >/dev/null 2>&1; then
-    _print "Installing Python3"
-    _cmd "sudo apt update"
-    _cmd "sudo apt install -y python3"
-fi
-
-# pip installation
-if ! dpkg -s python3-pip >/dev/null 2>&1; then
-    _print "Installing Python3 Pip"
-    _cmd "sudo apt update"
-    _cmd "sudo apt install -y python3-pip"
-fi
-
-# virtual environment installation
-if ! dpkg -s virtualenv >/dev/null 2>&1; then
-    _print "Installing virtual environment"
-    _cmd "sudo apt install -y python3-virtualenv"
-fi
+# dependencies installation using apt
+_dependencies_installation
 
 # clone or update the repository
 if ! [[ -d "$DOTFILES_DIR" ]]; then
@@ -121,12 +116,6 @@ else
     _cmd "git -C $DOTFILES_DIR pull --quiet"
 fi
 
-_print "Activating virtual environment"
-_cmd "virtualenv -p python3 venv-ansible"
-_cmd "source venv-ansible/bin/activate"
-
-_python_env_configuration
-
 pushd "$DOTFILES_DIR" 2>&1 >/dev/null
 
 REMOTE_URL=$(git config --get remote.origin.url)
@@ -137,9 +126,6 @@ fi
 
 _print "Running playbook"
 ansible-playbook --inventory inventory.yml "$DOTFILES_DIR/main.yml" "$@"
-
-_print "Deactivating virtual environment"
-_cmd "deactivate"
 
 _print "Reload the bash configuration"
 _cmd "source $HOME/.bashrc"

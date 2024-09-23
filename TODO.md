@@ -3,7 +3,6 @@
 - [ ] Test Shell alternatives 
 - [ ] Cross-shell Prompt -> [Starship](https://starship.rs/)
 - [ ] Smart cd Command -> [Zoxide](https://github.com/ajeetdsouza/zoxide)
-- [ ] Nvim Markdown viewer -> [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
 - [ ] Copy Host's SSH keys
 - [ ] Find a tool to visualize git tree
 
@@ -14,6 +13,7 @@
 ## Nvim
 
 - [ ] Manage binding for search -> Currently 'n' is used to move in Colemak mode
+- [ ] Nvim Markdown viewer -> [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
 
 ## Ansible translation
 

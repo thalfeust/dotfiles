@@ -9,7 +9,7 @@ Fully automated deployment of my development environment, based on Ansible.
 This playbook includes a custom shell script located at bin/dotfiles that initialize the environment and performs a full system upgrade.
 
 ```shell
-source <(curl -fsSL https://raw.githubusercontent.com/thalfeust/dotfiles/main/bin/dotfiles)
+sudo ls && source <(curl -fsSL https://raw.githubusercontent.com/thalfeust/dotfiles/main/bin/dotfiles)
 ```
 
 > ℹ️ Note: The script clones the repository using the https URL, but changes the remote to a SSH URL, which requires an SSH key
@@ -17,7 +17,7 @@ source <(curl -fsSL https://raw.githubusercontent.com/thalfeust/dotfiles/main/bi
 After the first run, the script can be executed using the following command:
 
 ```shell
-source ~/.dotfiles/bin/dotfiles
+sudo ls && source ~/.dotfiles/bin/dotfiles
 ```
 
 > ⚠️ Warning: Execution of the script using `source` is mandatory for certain updates to be applied
@@ -32,10 +32,6 @@ source ~/.dotfiles/bin/dotfiles
 Ansible is an open-source IT automation tool that simplifies configuration management, application deployment, and task automation across distributed systems.
 
 It is used to deploy the development environment into the localhost machine.
-
-### Specifications
-* The current version of the script use a Python virtual environment to install Ansible. It means that Ansible cannot install pip packages outside the environment
-* In the current state of ansible/dotfiles, no Python packages can be installed
 
 ## Windows Terminal specification
 
