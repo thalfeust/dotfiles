@@ -33,6 +33,12 @@ Ansible is an open-source IT automation tool that simplifies configuration manag
 
 It is used to deploy the development environment into the localhost machine.
 
+### Sensitive Data
+
+To facilitate deployment, this repository contains a vault with sensitive data, such as the password, etc. See dedicated documentation page.
+
+> Currently, the vault only contains the sudo password, which is used when `become` is set to `true`.
+
 ## Windows Terminal specification
 
 Windows Terminal `AtlasEngine` incorrectly renders some NerdFonts glyphs ([Github issue](https://github.com/microsoft/terminal/issues/14022)).
@@ -43,6 +49,7 @@ To solve the problem, you can deactivate AtlasEngine :
 
 ## Documentation
 
+* [Ansible](./doc/Ansible.md)
 * [Docker container configuration](./doc/DockerContainer.md)
 * [Font and Theme documentation](./doc/FontAndTheme.md)
 * [Neovim configuration](./doc/NeovimConfiguration.md)

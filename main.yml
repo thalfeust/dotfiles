@@ -2,8 +2,16 @@
 - name: DotFiles Config
   hosts: localhost
   connection: local
+  vars_files: vars/vault.yml
 
   pre_tasks:
+    - name: Update and upgrade apt packages
+      ansible.builtin.apt:
+        upgrade: yes
+        update_cache: yes # apt update
+        cache_valid_time: 86400 # one day
+      become: true
+
     - name: Install common packages
       ansible.builtin.apt:
         name:
@@ -13,7 +21,6 @@
           - curl
           - htop
         state: latest
-        update_cache: yes # runs the equivalent of apt-get update before the operation
       become: true
 
   tasks:

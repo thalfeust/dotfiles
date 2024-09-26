@@ -125,7 +125,7 @@ if ! [[ "$REMOTE_URL" = "$GIT_SSH" ]]; then
 fi
 
 _print "Running playbook"
-ansible-playbook --inventory inventory.yml "$DOTFILES_DIR/main.yml" "$@"
+ansible-playbook --inventory inventory.yml --ask-vault-pass "$DOTFILES_DIR/main.yml" "$@"
 
 _print "Reload the bash configuration"
 _cmd "source $HOME/.bashrc"

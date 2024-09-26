@@ -5,6 +5,7 @@
 - [ ] Smart cd Command -> [Zoxide](https://github.com/ajeetdsouza/zoxide)
 - [ ] Copy Host's SSH keys
 - [ ] Find a tool to visualize git tree
+- [ ] Setup git (ssh, username, CRLF, editor, etc)
 
 ## Tmux
 
