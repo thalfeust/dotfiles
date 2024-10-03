@@ -81,3 +81,6 @@ To solve the problem, you can deactivate AtlasEngine :
 ### TheAltF4Stream
 * 󰗃 [How To Automate Your Dev Setup](https://www.youtube.com/watch?v=V_Cj_p6se3k)
 *  [Dotfiles](https://github.com/ALT-F4-LLC/dotfiles)
+
+### Others
+*  [Awesome Tmux - List of helpful tmux links for various tutorials, plugins, and configuration settings](https://github.com/rothgar/awesome-tmux) 
