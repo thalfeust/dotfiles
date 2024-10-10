@@ -20,9 +20,15 @@ vim.opt.rtp:prepend(lazypath)
 -- plugins loading
 require("lazy").setup({
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-    { "olimorris/persisted.nvim", lazy = false, config = true }
+    { "olimorris/persisted.nvim", lazy = false, config = true },
+
+    -- language server protocole plugins
+    { "williamboman/mason.nvim", lazy = false, build = ":MasonUpdate" },
+    { "williamboman/mason-lspconfig.nvim", lazy = false },
+    { "neovim/nvim-lspconfig", lazy = false }
 })
 
 -- plugins configuration
 require "user.colorscheme"
+require "user.lsp"
 require "user.session"
