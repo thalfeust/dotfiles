@@ -25,6 +25,7 @@
     - lua/user/colorscheme.lua
     - lua/user/keymaps_colemak.lua
     - lua/user/keymaps_qwerty.lua
+    - lua/user/lsp.lua
     - lua/user/options.lua
     - lua/user/session.lua
 
