@@ -49,8 +49,19 @@ require("lazy").setup({
 			require("user.lsp")
 		end,
 	},
+
+	-- completion plugins
+	{
+		"hrsh7th/nvim-cmp",
+		lazy = false,
+		config = function()
+			require("user.cmp")
+		end,
+		dependencies = {
+			{ "hrsh7th/cmp-nvim-lsp" },
+		},
+	},
 })
 
--- plugins configuration
 require("user.colorscheme")
 require("user.session")
