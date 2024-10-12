@@ -25,10 +25,15 @@ require("lazy").setup({
     -- language server protocole plugins
     { "williamboman/mason.nvim", lazy = false, build = ":MasonUpdate" },
     { "williamboman/mason-lspconfig.nvim", lazy = false },
-    { "neovim/nvim-lspconfig", lazy = false }
+    { "neovim/nvim-lspconfig", lazy = false },
+
+    -- completion plugins
+    { "hrsh7th/nvim-cmp", lazy = false },
+    { "hrsh7th/cmp-nvim-lsp", lazy = false }
 })
 
 -- plugins configuration
 require "user.colorscheme"
+require "user.cmp"
 require "user.lsp"
 require "user.session"
