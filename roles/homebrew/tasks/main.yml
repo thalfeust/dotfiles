@@ -6,6 +6,15 @@
     mode: "0744"
     force: true
 
+- name: Homebrew | Linuxbrew directory creation
+  ansible.builtin.file:
+    path: /home/linuxbrew
+    state: directory
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: '0755'
+  become: yes
+
 - name: Homebrew | Installation
   ansible.builtin.shell: /tmp/install.sh
   args:
