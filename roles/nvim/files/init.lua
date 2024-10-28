@@ -22,6 +22,9 @@ require("lazy").setup({
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{ "olimorris/persisted.nvim", lazy = false, config = true },
 
+	-- plugin denpendencies
+	{ "nvim-lua/plenary.nvim" },
+
 	-- external package management
 	{
 		"williamboman/mason.nvim",
@@ -29,6 +32,19 @@ require("lazy").setup({
 		build = ":MasonUpdate",
 		config = function()
 			require("mason").setup()
+		end,
+	},
+	{
+		"Whoissethdaniel/mason-tool-installer.nvim",
+		lazy = false,
+		config = function()
+			require("mason-tool-installer").setup({
+				auto_update = true,
+				run_on_start = true,
+				ensure_installed = {
+					"stylua", -- lua formatter
+				},
+			})
 		end,
 	},
 
@@ -61,7 +77,17 @@ require("lazy").setup({
 			{ "hrsh7th/cmp-nvim-lsp" },
 		},
 	},
+
+	-- formatter plugins
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		event = "VeryLazy",
+		opts = function()
+			return require("user.null-ls")
+		end,
+	},
 })
 
+-- plugins configuration
 require("user.colorscheme")
 require("user.session")
