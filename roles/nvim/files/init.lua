@@ -75,6 +75,7 @@ require("lazy").setup({
 		end,
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "onsails/lspkind.nvim" },
 		},
 	},
 

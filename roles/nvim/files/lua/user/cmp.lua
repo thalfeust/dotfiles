@@ -1,4 +1,5 @@
 local cmp = require("cmp")
+local lspkind = require("lspkind")
 
 local key_bindings = {
 	qwerty = { scrolld = "<C-d>", scrollu = "<C-d>", openclose = "<C-r>" },
@@ -47,6 +48,15 @@ cmp.setup({
 
 	-- cmp window style
 	view = {
-		entries = "native",
+		entries = "custom",
+	},
+
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = "symbol_text",
+			menu = {
+				nvim_lsp = "[LSP]",
+			},
+		}),
 	},
 })
