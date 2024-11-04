@@ -21,6 +21,7 @@
 - [ ] Nvim Markdown viewer -> [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)
 - [ ] Check Treesitter -> [video](https://www.youtube.com/watch?v=FuYQ7M73bC0)
 - [ ] Customize `nvim-cmp` menu appearance -> [wiki](https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance)
+- [ ] Install Snippet collection -> [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
 
 ## Ansible translation
 

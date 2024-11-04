@@ -9,8 +9,15 @@ local key_bindings = {
 local layout_keys = key_bindings[layout] or key_bindings.qwerty
 
 cmp.setup({
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body)
+		end,
+	},
+
 	sources = {
 		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
 	},
 
 	mapping = cmp.mapping.preset.insert({
@@ -56,6 +63,7 @@ cmp.setup({
 			mode = "symbol_text",
 			menu = {
 				nvim_lsp = "[LSP]",
+				luasnip = "[snip]",
 			},
 		}),
 	},

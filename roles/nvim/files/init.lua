@@ -76,6 +76,7 @@ require("lazy").setup({
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "onsails/lspkind.nvim" },
+			{ "saadparwaiz1/cmp_luasnip" },
 		},
 	},
 
@@ -86,6 +87,14 @@ require("lazy").setup({
 		opts = function()
 			return require("user.null-ls")
 		end,
+	},
+
+	-- snippet engine
+	{
+		"L3MON4D3/LuaSnip",
+		version = "v2.*",
+		build = "make install_jsregexp",
+		lazy = false,
 	},
 })
 
