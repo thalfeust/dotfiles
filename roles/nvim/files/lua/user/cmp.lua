@@ -16,8 +16,10 @@ cmp.setup({
 	},
 
 	sources = {
+		{ name = "nvim_lua" }, -- source for neovim Lua API
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
+		{ name = "buffer", keyword_length = 3 },
 	},
 
 	mapping = cmp.mapping.preset.insert({
@@ -62,8 +64,10 @@ cmp.setup({
 		format = lspkind.cmp_format({
 			mode = "symbol_text",
 			menu = {
+				nvim_lua = "[API]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[snip]",
+				buffer = "[buf]",
 			},
 		}),
 	},
