@@ -59,10 +59,21 @@ cmp.setup({
 	view = {
 		entries = "custom",
 	},
+	window = {
+		completion = cmp.config.window.bordered({
+			col_offset = -3,
+			scrollbar = false,
+			winhighlight = "Normal:Normal,FloatBorder:CmpBorder,CursorLine:Visual,Search:None",
+		}),
+		documentation = cmp.config.window.bordered({
+			winhighlight = "Normal:Normal,FloatBorder:CmpBorder,CursorLine:Visual,Search:None",
+		}),
+	},
 
 	formatting = {
+		fields = { "kind", "abbr", "menu" },
 		format = lspkind.cmp_format({
-			mode = "symbol_text",
+			mode = "symbol",
 			menu = {
 				nvim_lua = "[API]",
 				nvim_lsp = "[LSP]",
@@ -72,3 +83,15 @@ cmp.setup({
 		}),
 	},
 })
+
+-- color customization function
+local function set_cmp_item_color(item, source)
+	local color = vim.api.nvim_get_hl(0, { name = source }).fg
+	vim.api.nvim_set_hl(0, item, { fg = color, bg = "NONE" })
+end
+
+-- customize entry's menu color
+set_cmp_item_color("CmpItemMenu", "NonText")
+set_cmp_item_color("CmpItemAbbr", "Text")
+set_cmp_item_color("CmpItemAbbrMatch", "Statement")
+set_cmp_item_color("CmpBorder", "CursorLineNr")
