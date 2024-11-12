@@ -22,6 +22,14 @@ sudo ls && source ~/.dotfiles/bin/dotfiles
 
 > ⚠️ Warning: Execution of the script using `source` is mandatory for certain updates to be applied
 
+### Run a specific role
+
+To run a specific role, add the option tags to the command:
+
+```shell
+source ~/.dotfiles/bin/dotfiles --tags homebrew
+```
+
 ## Requirements
 
 * Operating System: **Ubuntu**

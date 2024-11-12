@@ -26,6 +26,9 @@
   tasks:
     - name: Run all roles
       include_role:
+        apply:
+          tags:
+            - "{{ role }}"
         name: "{{ role }}"
       loop:
         - bash
@@ -36,3 +39,5 @@
         - tmux
       loop_control:
         loop_var: role
+      tags:
+        - always
