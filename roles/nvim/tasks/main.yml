@@ -23,8 +23,11 @@
   loop:
     - init.lua
     - lua/user/colorscheme.lua
+    - lua/user/cmp.lua
     - lua/user/keymaps_colemak.lua
     - lua/user/keymaps_qwerty.lua
+    - lua/user/lsp.lua
+    - lua/user/null-ls.lua
     - lua/user/options.lua
     - lua/user/session.lua
 
