@@ -12,4 +12,4 @@ export PATH=$PATH:$HOME/.local/bin
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 
 # Atuin
-eval "$(atuin init bash)"
+eval "$(atuin init bash --disable-up-arrow)"
