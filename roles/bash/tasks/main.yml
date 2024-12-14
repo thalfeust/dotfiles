@@ -7,3 +7,9 @@
   loop:
     - .bashrc
     - .bash_aliases
+
+- name: Bash | Curl bash-preexec
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh
+    dest: "{{ ansible_user_dir }}/.bash-preexec.sh"
+    mode: "0744"

@@ -31,6 +31,7 @@
             - "{{ role }}"
         name: "{{ role }}"
       loop:
+        - atuin
         - bash
         - bat
         - fonts

@@ -1,0 +1,12 @@
+---
+- name: Atuin | Installation
+  community.general.homebrew:
+    name: atuin
+    state: latest
+    update_homebrew: yes
+
+- name: Atuin | Copy dotfiles
+  ansible.builtin.copy:
+    src: config.toml
+    dest: "{{ ansible_user_dir }}/.config/atuin/config.toml"
+    force: true
