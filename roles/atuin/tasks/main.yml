@@ -5,6 +5,11 @@
     state: latest
     update_homebrew: yes
 
+- name: Atuin | Config folder creation
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/atuin"
+    state: directory
+
 - name: Atuin | Copy dotfiles
   ansible.builtin.copy:
     src: config.toml
